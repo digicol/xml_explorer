@@ -341,7 +341,7 @@ EOT;
         
         $xpath = new DOMXPath($dom);
         
-        foreach ($xpath->query('//namespace::*' /*, $dom->documentElement */) as $xmlns_node) 
+        foreach ($xpath->query('//namespace::*') as $xmlns_node) 
         {
             // Skip built-in xmlns:xml="http://www.w3.org/XML/1998/namespace"
             
