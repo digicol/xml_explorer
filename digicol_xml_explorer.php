@@ -42,6 +42,7 @@ class Digicol_Xml_Explorer
         --xmlns prefix=uri      Define namespace prefixes to be used in output.
                                 If you don't set this option, namespaces will be
                                 displayed using auto-generated prefixes, e.g. ns1.
+                                (Optional, multiple values allowed).
         
     -h, --help             Display this help message and exit.
 
@@ -341,7 +342,7 @@ EOT;
         
         $xpath = new DOMXPath($dom);
         
-        foreach ($xpath->query('namespace::*', $dom->documentElement) as $xmlns_node) 
+        foreach ($xpath->query('//namespace::*' /*, $dom->documentElement */) as $xmlns_node) 
         {
             // Skip built-in xmlns:xml="http://www.w3.org/XML/1998/namespace"
             
@@ -615,7 +616,6 @@ EOT;
         }
     }
 }
-
 
 
 // Execute
