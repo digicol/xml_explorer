@@ -337,8 +337,7 @@ EOT;
             return -1;
         }
 
-        // Look for namespaces registered on the root tag
-        // XXX should we do this lookup for every tag?
+        // Look for namespaces registered anywhere in the XML
         
         $xpath = new DOMXPath($dom);
         
