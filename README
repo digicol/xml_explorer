@@ -1,5 +1,218 @@
-Licensed under the PHP License
+A PHP command line script for exploring XML structures
+======================================================
+by Tim Strehle http://www.strehle.de/tim/
 
-Use at your own risk!
+Read and parse multiple XML files and display a report summarizing their structure.
 
-Tim Strehle <tim@digicol.de>
+Use this when you're being provided with a bunch of sample XML files and don't know 
+what they actually contain.
+
+Requires PHP 5 with the DOM extension, which is enabled by default.
+Licensed under the PHP License. Use at your own risk!
+
+
+Usage: 
+======
+
+php digicol_xml_explorer.php [ OPTIONS ] <file> [<file> ...]
+
+Use -h / --help to list available options.
+
+
+Example invocation:
+===================
+
+tims-mac:xml_explorer tim$ find 'European News Service' -name '*.xml' \
+ | php digicol_xml_explorer.php - --xmlns 'atom=http://www.w3.org/2005/Atom' \
+   -s '/atom:entry/atom:link/apcm:Characteristics/@MediaType' \
+      '/atom:entry/apcm:ContentMetadata/apcm:Keywords'
+##################
+
+Done. Successfully parsed 18 files. XML parse errors in 0 files.
+
+3 XML namespaces found:
+xmlns:apcm="http://ap.org/schemas/03/2005/apcm"
+xmlns:apnm="http://ap.org/schemas/03/2005/apnm"
+xmlns:atom="http://www.w3.org/2005/Atom"
+
+84 XML tags found:
+apcm:ByLine, apcm:Characteristics, apcm:ContentMetadata, apcm:Cycle, apcm:DateLine, apcm:DateLineLocation, apcm:EntityClassification, apcm:ExtendedHeadLine, apcm:FirstCreated, apcm:HeadLine, apcm:ItemContentType, apcm:Keywords, apcm:LegacyTypeSetFormat, apcm:MediaType, apcm:OriginalHeadLine, apcm:Priority, apcm:Property, apcm:Selector, apcm:SlugLine, apcm:SubjectClassification, apcm:TransmissionReference, apnm:LegacyManagementType, apnm:LegacyNewsManagement, apnm:LegacyType, apnm:ManagementId, apnm:ManagementSequenceNumber, apnm:NewsManagement, apnm:PublishingSpecialInstructions, apnm:PublishingStatus, apnm:TypeSupportingData, atom:author, atom:block, atom:body, atom:body.content, atom:body.end, atom:body.head, atom:byline, atom:byttl, atom:content, atom:date.issue, atom:dateline, atom:distributor, atom:doc-id, atom:doc.copyright, atom:doc.rights, atom:docdata, atom:ed-msg, atom:entry, atom:head, atom:hedline, atom:hl1, atom:hl2, atom:id, atom:link, atom:location, atom:name, atom:nitf, atom:p, atom:published, atom:rights, atom:title, atom:updated, block, body, body.content, body.end, body.head, byline, byttl, date.issue, dateline, distributor, doc-id, doc.copyright, doc.rights, docdata, ed-msg, head, hedline, hl1, hl2, location, nitf, p
+
+38 XML attributes found:
+Authority, City, ContentId, Country, CountryArea, CountryAreaName, CountryName, DataType, FileExtension, Format, Id, IngestLink, Legacy, MediaType, MimeType, Name, Numeric, Role, SizeInBytes, Title, Value, Words, agent, change.date, change.time, holder, href, id, info, length, norm, owner, regsrc, rel, title, type, version, year
+
+====================================================================================================
+XPath                                                                        Files Occur  Length  ML
+====================================================================================================
+/atom:entry                                                                      9     1   11211 yes
+/atom:entry/apcm:ContentMetadata                                                 9     1    1004 yes
+/atom:entry/apcm:ContentMetadata/apcm:ByLine                                     5     1      15  no
+/atom:entry/apcm:ContentMetadata/apcm:ByLine/@Title                              5     1      27  no
+/atom:entry/apcm:ContentMetadata/apcm:Cycle                                      9     1       2  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLine                                   9     1      27  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation                           9     1       0  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation/@City                     9     1      12  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation/@Country                  9     1       3  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation/@CountryArea              1     1       2  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation/@CountryAreaName          1     1      20  no
+/atom:entry/apcm:ContentMetadata/apcm:DateLineLocation/@CountryName              9     1      20  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification                       9    29       0  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/@Authority            9    29      15  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/@Id                   9    29      32  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/@Value                9    29      26  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/apcm:Property         7    26       0  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/apcm:Property/@Id     7    26      32  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/apcm:Property/@Name     7    26      10  no
+/atom:entry/apcm:ContentMetadata/apcm:EntityClassification/apcm:Property/@Value     7    26      20  no
+/atom:entry/apcm:ContentMetadata/apcm:ExtendedHeadLine                           9     1      93  no
+/atom:entry/apcm:ContentMetadata/apcm:FirstCreated                               9     1      20  no
+/atom:entry/apcm:ContentMetadata/apcm:HeadLine                                   9     1      50  no
+/atom:entry/apcm:ContentMetadata/apcm:ItemContentType                            9     1      16  no
+/atom:entry/apcm:ContentMetadata/apcm:Keywords                                   9     1      27  no
+/atom:entry/apcm:ContentMetadata/apcm:LegacyTypeSetFormat                        9     1       2  no
+/atom:entry/apcm:ContentMetadata/apcm:MediaType                                  9     1       4  no
+/atom:entry/apcm:ContentMetadata/apcm:OriginalHeadLine                           9     1      50  no
+/atom:entry/apcm:ContentMetadata/apcm:Priority                                   9     1       0  no
+/atom:entry/apcm:ContentMetadata/apcm:Priority/@Legacy                           9     1       1  no
+/atom:entry/apcm:ContentMetadata/apcm:Priority/@Numeric                          9     1       1  no
+/atom:entry/apcm:ContentMetadata/apcm:Property                                   9     2       0  no
+/atom:entry/apcm:ContentMetadata/apcm:Property/@Id                               9     2      33  no
+/atom:entry/apcm:ContentMetadata/apcm:Property/@Name                             9     2      16  no
+/atom:entry/apcm:ContentMetadata/apcm:Property/@Value                            9     2      21  no
+/atom:entry/apcm:ContentMetadata/apcm:Selector                                   9     1       5  no
+/atom:entry/apcm:ContentMetadata/apcm:SlugLine                                   9     1      44  no
+/atom:entry/apcm:ContentMetadata/apcm:SubjectClassification                      9    10       0  no
+/atom:entry/apcm:ContentMetadata/apcm:SubjectClassification/@Authority           9    10      16  no
+/atom:entry/apcm:ContentMetadata/apcm:SubjectClassification/@Id                  9    10      32  no
+/atom:entry/apcm:ContentMetadata/apcm:SubjectClassification/@Value               9    10      32  no
+/atom:entry/apcm:ContentMetadata/apcm:TransmissionReference                      9     1       7  no
+/atom:entry/apnm:NewsManagement                                                  9     1     301 yes
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement                        5     1      40 yes
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement/apnm:LegacyManagementType     5     1       1  no
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement/apnm:LegacyManagementType/@Value     5     1       4  no
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement/apnm:LegacyManagementType/apnm:TypeSupportingData     5     1       1  no
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement/apnm:LegacyManagementType/apnm:TypeSupportingData/@DataType     5     1      10  no
+/atom:entry/apnm:NewsManagement/apnm:LegacyNewsManagement/apnm:LegacyType        5     1      16  no
+/atom:entry/apnm:NewsManagement/apnm:ManagementId                                9     1      52  no
+/atom:entry/apnm:NewsManagement/apnm:ManagementSequenceNumber                    9     1       1  no
+/atom:entry/apnm:NewsManagement/apnm:PublishingSpecialInstructions               9     1     164  no
+/atom:entry/apnm:NewsManagement/apnm:PublishingStatus                            9     1       6  no
+/atom:entry/atom:author                                                          9     1       2  no
+/atom:entry/atom:author/atom:name                                                9     1       2  no
+/atom:entry/atom:content                                                         9     1    9426 yes
+/atom:entry/atom:content/@type                                                   9     1       8  no
+/atom:entry/atom:content/atom:nitf                                               9     1    9426 yes
+/atom:entry/atom:content/atom:nitf/@change.date                                  9     1      16  no
+/atom:entry/atom:content/atom:nitf/@change.time                                  9     1       5  no
+/atom:entry/atom:content/atom:nitf/@version                                      9     1      25  no
+/atom:entry/atom:content/atom:nitf/atom:body                                     9     1    9426 yes
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.content                   9     1    9087 yes
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.content/atom:block        9     2    8701 yes
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.content/atom:block/@id     9     2      22  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.content/atom:block/atom:p     9    33     620  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.end                       9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head                      9     1     287 yes
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:byline          5     1      39  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:byline/atom:byttl     5     1      27  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:dateline        9     1      27  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:dateline/atom:location     9     1      27  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:distributor     9     1      20  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:hedline         9     1     119 yes
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:hedline/atom:hl1     9     1      50  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:hedline/atom:hl1/@id     9     1       8  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:hedline/atom:hl2     9     1      50  no
+/atom:entry/atom:content/atom:nitf/atom:body/atom:body.head/atom:hedline/atom:hl2/@id     9     1      16  no
+/atom:entry/atom:content/atom:nitf/atom:head                                     9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata                        9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:date.issue        9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:date.issue/@norm     9     1      16  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc-id            9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc-id/@regsrc     9     1       2  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.copyright     9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.copyright/@holder     9     1       2  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.copyright/@year     9     1       4  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.rights        9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.rights/@agent     9     1      29  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.rights/@owner     9     1      17  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:doc.rights/@type     9     1       4  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:ed-msg            9     1       0  no
+/atom:entry/atom:content/atom:nitf/atom:head/atom:docdata/atom:ed-msg/@info      9     1     164  no
+/atom:entry/atom:id                                                              9     1      52  no
+/atom:entry/atom:link                                                            9     3       0  no
+/atom:entry/atom:link/@href                                                      9     3     366  no
+/atom:entry/atom:link/@length                                                    9     3       4  no
+/atom:entry/atom:link/@rel                                                       9     3       9  no
+/atom:entry/atom:link/@title                                                     9     3      10  no
+/atom:entry/atom:link/@type                                                      9     3      24  no
+/atom:entry/atom:link/apcm:Characteristics                                       9     3       0  no
+/atom:entry/atom:link/apcm:Characteristics/@ContentId                            9     3      52  no
+/atom:entry/atom:link/apcm:Characteristics/@FileExtension                        9     3       4  no
+/atom:entry/atom:link/apcm:Characteristics/@Format                               9     3       8  no
+/atom:entry/atom:link/apcm:Characteristics/@IngestLink                           9     3       4  no
+/atom:entry/atom:link/apcm:Characteristics/@MediaType                            9     3       6  no
+/atom:entry/atom:link/apcm:Characteristics/@MimeType                             9     3      24  no
+/atom:entry/atom:link/apcm:Characteristics/@Role                                 9     3       4  no
+/atom:entry/atom:link/apcm:Characteristics/@SizeInBytes                          9     3       4  no
+/atom:entry/atom:link/apcm:Characteristics/@Words                                9     3       4  no
+/atom:entry/atom:published                                                       9     1      20  no
+/atom:entry/atom:rights                                                          9     1     132  no
+/atom:entry/atom:title                                                           9     1      31  no
+/atom:entry/atom:updated                                                         9     1      24  no
+/nitf                                                                            9     1    9150 yes
+/nitf/@change.date                                                               9     1      16  no
+/nitf/@change.time                                                               9     1       5  no
+/nitf/@version                                                                   9     1      25  no
+/nitf/body                                                                       9     1    9150 yes
+/nitf/body/body.content                                                          9     1    8883 yes
+/nitf/body/body.content/block                                                    9     2    8515 yes
+/nitf/body/body.content/block/@id                                                9     2      22  no
+/nitf/body/body.content/block/p                                                  9    33     620  no
+/nitf/body/body.end                                                              9     1       0  no
+/nitf/body/body.head                                                             9     1     245 yes
+/nitf/body/body.head/byline                                                      5     1      39  no
+/nitf/body/body.head/byline/byttl                                                5     1      27  no
+/nitf/body/body.head/dateline                                                    9     1      27  no
+/nitf/body/body.head/dateline/location                                           9     1      27  no
+/nitf/body/body.head/distributor                                                 9     1      20  no
+/nitf/body/body.head/hedline                                                     9     1     113 yes
+/nitf/body/body.head/hedline/hl1                                                 9     1      50  no
+/nitf/body/body.head/hedline/hl1/@id                                             9     1       8  no
+/nitf/body/body.head/hedline/hl2                                                 9     1      50  no
+/nitf/body/body.head/hedline/hl2/@id                                             9     1      16  no
+/nitf/head                                                                       9     1       0  no
+/nitf/head/docdata                                                               9     1       0  no
+/nitf/head/docdata/date.issue                                                    9     1       0  no
+/nitf/head/docdata/date.issue/@norm                                              9     1      16  no
+/nitf/head/docdata/doc-id                                                        9     1       0  no
+/nitf/head/docdata/doc-id/@regsrc                                                9     1       2  no
+/nitf/head/docdata/doc.copyright                                                 9     1       0  no
+/nitf/head/docdata/doc.copyright/@holder                                         9     1       2  no
+/nitf/head/docdata/doc.copyright/@year                                           9     1       4  no
+/nitf/head/docdata/doc.rights                                                    9     1       0  no
+/nitf/head/docdata/doc.rights/@agent                                             9     1      29  no
+/nitf/head/docdata/doc.rights/@owner                                             9     1      17  no
+/nitf/head/docdata/doc.rights/@type                                              9     1       4  no
+/nitf/head/docdata/ed-msg                                                        9     1       0  no
+/nitf/head/docdata/ed-msg/@info                                                  9     1     164  no
+====================================================================================================
+
+====================================================================================================
+Values for /atom:entry/atom:link/apcm:Characteristics/@MediaType                               Files
+====================================================================================================
+Binary                                                                                             9
+Text                                                                                               9
+====================================================================================================
+
+====================================================================================================
+Values for /atom:entry/apcm:ContentMetadata/apcm:Keywords                                      Files
+====================================================================================================
+Al Wasl-Maradona                                                                                   1
+Britain-Terror                                                                                     1
+France-Cannes-Bonham Carter                                                                        1
+India-Inflation                                                                                    1
+Iraq                                                                                               1
+Italy-Elections                                                                                    1
+The Mediator Factor                                                                                1
+US-China-Military                                                                                  1
+Vatican-Church Abuse                                                                               1
+====================================================================================================

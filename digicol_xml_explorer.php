@@ -31,7 +31,7 @@ class Digicol_Xml_Explorer
   know what they actually contain.
 
   Set <file> to "-" to read file names or XML from STDIN. (This allows you to use
-  digicol_xml_explorer.php in conjunction with "find" or "dc_dossier.php".)
+  digicol_xml_explorer.php in conjunction with "find".)
 
   Usage: php digicol_xml_explorer.php [ OPTIONS ] <file> [<file> ...]
 
@@ -46,7 +46,7 @@ class Digicol_Xml_Explorer
         
     -h, --help             Display this help message and exit.
 
-  Copyright 2003-2011 by Digital Collections Verlagsgesellschaft mbH.
+  Copyright 2003-2012 by Digital Collections Verlagsgesellschaft mbH.
   Report bugs to: <tim@digicol.de>
 
 
