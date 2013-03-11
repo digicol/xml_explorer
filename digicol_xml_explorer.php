@@ -360,11 +360,11 @@ EOT;
 
         // Start recursive processing on root node
 
-        $this->processNode($dom->documentElement, '/', &$results);
+        $this->processNode($dom->documentElement, '/', $results);
         
         // Fetch XPath select values
         
-        $this->processSelect($dom, &$results);
+        $this->processSelect($dom, $results);
         
         return 1;        
     }
